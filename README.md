@@ -3,8 +3,8 @@ Using the temporary mail system provided by several sites in Python
 
 ||Supporting Domain|
 |:---|:---:|
-|create_mail|cloud-mail.top, greencafe24.com, crepeau12.com, appzily.com, coffeetimer24.com, popcornfarm7.com, bestparadize.com, kjkszpjcompany.com, cashflow35.com, crossmailjet.com, kobrandly.com, blondemorkin.com, block521.com, best-john-boats.com, popcornfly.com, plancetose.com(temp-mail.io)|
-|remove_mail|ruu.kr, iralborz.bid, kumli.racing(ruu.kr)|
+|create_mail|cloud-mail.top, greencafe24.com, crepeau12.com, appzily.com, coffeetimer24.com, popcornfarm7.com, bestparadize.com, kjkszpjcompany.com, cashflow35.com, crossmailjet.com, kobrandly.com, blondemorkin.com, block521.com, best-john-boats.com, popcornfly.com, plancetose.com (temp-mail.io)|
+|remove_mail|ruu.kr, iralborz.bid, kumli.racing (ruu.kr)|
 |get_mail|All mail above|
 
 
