@@ -17,5 +17,13 @@ Using the temporary mail system provided by several sites in Python
 
 ## Use
 ```
-import ~
+import tempmail
+
+domain = ""  # Ex. ruu.kr
+name = ""  # Ex. abcde12345
+tm = tempmail.TemporaryMail(domain)
+
+# tm.create_mail(name) # only temp-mail.io
+print(tm.receive_mail(name))
+# tm.remove_mail(name) # only ruu.kr
 ```
