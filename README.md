@@ -20,8 +20,8 @@ Using the temporary mail system provided by several sites in Python
 - I can add additional functions or mail domains.
 
 
-## Use
-```
+## Quick Example
+```py
 import tempmail
 
 domain = ""  # Ex. ruu.kr
