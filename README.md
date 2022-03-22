@@ -9,7 +9,7 @@ Using the temporary mail system provided by several sites in Python
 
 
 ## Reference
-- This code is based on the temporary email system provided by ruu.kr and temp-mail.io, and will not be available when the email provided by both sites expires.
+- This code is based on the temporary email system provided by ruu.kr and temp-mail.io, and will not be available when the domain provided by both sites expires.
 - The domain that supports create_mail must create the email to receive it.
 - In order to receive mail, ruu.kr does not need to create mail, and temp-mail.io needs to create mail.
 - I can add additional functions or mail domains.
