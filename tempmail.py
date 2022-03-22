@@ -11,14 +11,16 @@ class TemporaryMail:
 
     def create_mail(self, id_):
         if self.domain in self.temp:
-            requests.post("https://api.internal.temp-mail.io/api/v3/email/new", json={"domain": self.domain, "name": id_})
+            return requests.post("https://api.internal.temp-mail.io/api/v3/email/new", json={"domain": self.domain, "name": id_}).json()['token']
 
-    def remove_mail(self, id_):
+    def remove_mail(self, id_, token=None):
         if domain in self.ruu:
             resp = requests.get(f"http://ruu.kr/list.jsp?id={id_}&domain={self.domain}")
             mail_id = list(set([str(i).split("'")[1].split("'")[0] for i in BeautifulSoup(resp.text, 'html.parser').findAll('td') if "'" in str(i)]))
             for mail in mail_id:
                 requests.get(f"http://ruu.kr/action.jsp?cmd=D&seq={mail}&to={id_}@{self.domain}")
+        elif domain in self.temp:
+            requests.delete(f"https://api.internal.temp-mail.io/api/v3/email/{id_}@{domain}", json={"token":token})
 
     def receive_mail(self, id_):
         result = []
@@ -62,6 +64,6 @@ if __name__ == "__main__":
     name = ""  # Ex. abcde12345
     tm = TemporaryMail(domain)
 
-    # tm.create_mail(name) # only temp-mail.io
+    # token = tm.create_mail(name) # Only temp-mail.io
     print(tm.receive_mail(name))
-    # tm.remove_mail(name) # only ruu.kr
+    # tm.remove_mail(name, token) # Only ruu.kr can be used, but if you have a token of temp-mail.io, you can remove temp-mail.io.
