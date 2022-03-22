@@ -1,11 +1,16 @@
 # Temporary-Mail
 Using the temporary mail system provided by several sites in Python
 
-||Supporting Domain|
+|Site|Supporting Domain|
 |:---|:---:|
-|create_mail|cloud-mail.top, greencafe24.com, crepeau12.com, appzily.com, coffeetimer24.com, popcornfarm7.com, bestparadize.com, kjkszpjcompany.com, cashflow35.com, crossmailjet.com, kobrandly.com, blondemorkin.com, block521.com, best-john-boats.com, popcornfly.com, plancetose.com (temp-mail.io)|
-|remove_mail|ruu.kr, iralborz.bid, kumli.racing (ruu.kr)|
-|receive_mail|All mail above|
+|temp-mail.io|cloud-mail.top, greencafe24.com, crepeau12.com, appzily.com, coffeetimer24.com, popcornfarm7.com, bestparadize.com, kjkszpjcompany.com, cashflow35.com, crossmailjet.com, kobrandly.com, blondemorkin.com, block521.com, best-john-boats.com, popcornfly.com, plancetose.com|
+|ruu.kr|ruu.kr, iralborz.bid, kumli.racing|
+
+||Supporting Site|
+|:---|:---:|
+|create_mail|temp-mail.io|
+|remove_mail|ruu.kr, temp-mail.io(If you have the token)|
+|receive_mail|temp-mail.io, ruu.kr|
 
 
 ## Reference
@@ -23,7 +28,7 @@ domain = ""  # Ex. ruu.kr
 name = ""  # Ex. abcde12345
 tm = tempmail.TemporaryMail(domain)
 
-# tm.create_mail(name) # only temp-mail.io
+# token = tm.create_mail(name) # Only temp-mail.io
 print(tm.receive_mail(name))
-# tm.remove_mail(name) # only ruu.kr
+# tm.remove_mail(name, token) # Only ruu.kr can be used, but if you have a token of temp-mail.io, you can remove temp-mail.io.
 ```
