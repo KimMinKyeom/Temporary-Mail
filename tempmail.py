@@ -6,26 +6,27 @@ from datetime import datetime
 class TemporaryMail:
     def __init__(self, domain):
         self.domain = domain
+        self.headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Whale/3.19.166.16 Safari/537.36'}
         self.ruu = ['ruu.kr', 'iralborz.bid', 'kumli.racing']
         self.temp = ['cloud-mail.top', 'greencafe24.com', 'crepeau12.com', 'appzily.com', 'coffeetimer24.com', 'popcornfarm7.com', 'bestparadize.com', 'kjkszpjcompany.com', 'cashflow35.com', 'crossmailjet.com', 'kobrandly.com', 'blondemorkin.com', 'block521.com', 'best-john-boats.com', 'popcornfly.com', 'plancetose.com']
 
     def create_mail(self, id_):
         if self.domain in self.temp:
-            return requests.post("https://api.internal.temp-mail.io/api/v3/email/new", json={"domain": self.domain, "name": id_}).json()['token']
+            return requests.post("https://api.internal.temp-mail.io/api/v3/email/new", json={"domain": self.domain, "name": id_}, headers=self.headers).json()['token']
 
     def remove_mail(self, id_, token=None):
         if domain in self.ruu:
-            resp = requests.get(f"http://ruu.kr/list.jsp?id={id_}&domain={self.domain}")
+            resp = requests.get(f"http://ruu.kr/list.jsp?id={id_}&domain={self.domain}", headers=self.headers)
             mail_id = list(set([str(i).split("'")[1].split("'")[0] for i in BeautifulSoup(resp.text, 'html.parser').findAll('td') if "'" in str(i)]))
             for mail in mail_id:
-                requests.get(f"http://ruu.kr/action.jsp?cmd=D&seq={mail}&to={id_}@{self.domain}")
+                requests.get(f"http://ruu.kr/action.jsp?cmd=D&seq={mail}&to={id_}@{self.domain}", headers=self.headers)
         elif domain in self.temp:
-            requests.delete(f"https://api.internal.temp-mail.io/api/v3/email/{id_}@{domain}", json={"token":token})
+            requests.delete(f"https://api.internal.temp-mail.io/api/v3/email/{id_}@{domain}", json={"token":token}, headers=self.headers)
 
     def receive_mail(self, id_):
         result = []
         if self.domain in self.ruu:
-            resp = requests.get(f"http://ruu.kr/list.jsp?id={id_}&domain={self.domain}")
+            resp = requests.get(f"http://ruu.kr/list.jsp?id={id_}&domain={self.domain}", headers=self.headers)
             soup = BeautifulSoup(resp.text, 'html.parser').findAll('td')
             mail_ids = {}
             for i in [soup[i:i + 4] for i in range(0, len(soup), 4)]:
@@ -36,7 +37,7 @@ class TemporaryMail:
                 except:
                     pass
             for mail in mail_ids:
-                resp = requests.get(f"http://ruu.kr/view.jsp?seq={mail}&to={id_}@{self.domain}")
+                resp = requests.get(f"http://ruu.kr/view.jsp?seq={mail}&to={id_}@{self.domain}", headers=self.headers)
                 soup = BeautifulSoup(resp.text, 'html.parser')
                 title = mail_ids[mail]
                 mail_info = soup.find('h2').text.split("/")
@@ -48,7 +49,7 @@ class TemporaryMail:
                     content = ""
                 result.append({'email': email, "title": title, "date": date, "content_text": content, "content_html": soup.find('body')})
         elif self.domain in self.temp:
-            resp = requests.get(f'https://api.internal.temp-mail.io/api/v3/email/{id_}@{self.domain}/messages').json()
+            resp = requests.get(f'https://api.internal.temp-mail.io/api/v3/email/{id_}@{self.domain}/messages', headers=self.headers).json()
             for mail in resp:
                 title = mail['subject']
                 email = mail['from'].split("<")[1].split(">")[0]
