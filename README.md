@@ -1,5 +1,5 @@
 # Temporary-Mail
-Using the temporary mail system provided by several sites in Python
+A Python utility to leverage temporary email systems from various providers.
 
 |Site|Supporting Domain|
 |:---|:---:|
@@ -9,26 +9,31 @@ Using the temporary mail system provided by several sites in Python
 ||Supporting Site|
 |:---|:---:|
 |create_mail|temp-mail.io|
-|remove_mail|ruu.kr, temp-mail.io(If you have the token)|
+|remove_mail|ruu.kr, temp-mail.io (Requires token for temp-mail.io)|
 |receive_mail|temp-mail.io, ruu.kr|
 
 
 ## Reference
-- This code is based on the temporary email system provided by ruu.kr and temp-mail.io, and will not be available when the domain provided by both sites expires.
-- The domain that supports create_mail must create the email to receive it.
-- In order to receive mail, ruu.kr does not need to create mail, and temp-mail.io needs to create mail.
-- I can add additional functions or mail domains.
+- This utility utilizes the temporary email systems from ruu.kr and temp-mail.io. Its functionality may be impacted if domains offered by these providers change.
+- Domains that support the create_mail function require email creation for reception.
+- For receiving emails, ruu.kr doesn't necessitate mail creation, whereas temp-mail.io does.
+- I'm open to adding more functionalities or supporting additional email domains in the future.
 
 
 ## Quick Example
 ```py
 import tempmail
 
-domain = ""  # Ex. ruu.kr
-name = ""  # Ex. abcde12345
-tm = tempmail.TemporaryMail(domain)
+DOMAIN = ""  # Example: ruu.kr
+ID = ""  # Example: abcde12345
 
-# token = tm.create_mail(name) # Only temp-mail.io
-print(tm.receive_mail(name))
-# tm.remove_mail(name, token) # Only ruu.kr can be used, but if you have a token of temp-mail.io, you can remove temp-mail.io.
+temp_service = tempmail.TemporaryMail(DOMAIN)
+
+# Mail creation feature only available for temp-mail.io
+# token = temp_service.create_mail(ID)
+
+print(temp_service.receive_mail(ID))
+
+# Removal only available for ruu.kr, but if you have a token from temp-mail.io, you can use it to remove the mail.
+# temp_service.remove_mail(ID, token)
 ```
